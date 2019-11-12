@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>OXO</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+       
+        <div id="jeu">
+        
+            <div>
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+            
+            <div>
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+            
+            <div>
+                <button></button>
+                <button></button>
+                <button></button>
+            </div>
+            
+            <div id="gameStatus"> </div>
+        </div>
+        
+        <script>
+            
+            function estValide(button)
+            {
+                return button.innerHTML.length === 0;
+            }
+            
+            function setSymbol(btn, symbole)
+            {
+                btn.innerHTML = symbole;
+            }
+            
+            function rechercherVainqueur(pions, joueurs, currentTurn)
+            {
+                //même symbole lignes collonnes ou diagonales
+                if (pions[0].innerHTML === joueurs[currentTurn]&& 
+                    pions[1].innerHTML === joueurs[currentTurn]&&
+                    pions[2].innerHTML === joueurs[currentTurn])
+                return true;
+            
+                if (pions[3].innerHTML === joueurs[currentTurn]&& 
+                    pions[4].innerHTML === joueurs[currentTurn]&&
+                    pions[5].innerHTML === joueurs[currentTurn])
+                return true;
+            
+                if (pions[6].innerHTML === joueurs[currentTurn]&& 
+                    pions[7].innerHTML === joueurs[currentTurn]&&
+                    pions[8].innerHTML === joueurs[currentTurn])
+                return true;
+                
+                if (pions[0].innerHTML === joueurs[currentTurn]&& 
+                    pions[3].innerHTML === joueurs[currentTurn]&&
+                    pions[6].innerHTML === joueurs[currentTurn])
+                return true;
+            
+                if (pions[1].innerHTML === joueurs[currentTurn]&& 
+                    pions[4].innerHTML === joueurs[currentTurn]&&
+                    pions[7].innerHTML === joueurs[currentTurn])
+                return true;
+            
+                if (pions[2].innerHTML === joueurs[currentTurn]&& 
+                    pions[5].innerHTML === joueurs[currentTurn]&&
+                    pions[8].innerHTML === joueurs[currentTurn])
+                return true;
+            
+                if (pions[0].innerHTML === joueurs[currentTurn]&& 
+                    pions[4].innerHTML === joueurs[currentTurn]&&
+                    pions[8].innerHTML === joueurs[currentTurn])
+                return true;
+            
+                if (pions[2].innerHTML === joueurs[currentTurn]&& 
+                    pions[4].innerHTML === joueurs[currentTurn]&&
+                    pions[6].innerHTML === joueurs[currentTurn])
+                return true;
+            }
+            
+            function tableauEstPlein(pions)
+            {
+                 for(var i=0, len=pions.length; i<len; i++)
+                 {
+                     if (pions[i].innerHTML.length ===0) //un des élément n'a pas de contenu
+                         return false; //le tableau n'est pas encore plein
+                 }
+                 return true; //le tableau est plein
+            }
+            var Afficheur = function (element)
+            {
+                var display = element;
+                
+                function setText(message) //modifier le contenu de l'element
+                {
+                    display.innerHTML = message;
+                }
+                return {sendMessage : setText}; //appeler la fonction seTtext
+            };
+            function main ()  
+            {
+                var pions = document.querySelectorAll("#jeu button");
+                var joueurs = ['X', 'O'];
+                var currentTurn = 0; //à qui le tour de jouer ?
+                var jeuEstFini = false;
+                var afficheur =new Afficheur(document.querySelector("#gameStatus"));
+                
+                afficheur.sendMessage("Le jeu peut commencé.<br/> Joueur "+ joueurs[currentTurn] + " c'est votre tour.");
+                
+                //Ecouteur d'événement
+                for(var i=0, len=pions.length; i<len; i++)
+                {
+                    pions[i].addEventListener("click", function()
+                    {
+                        if(jeuEstFini)
+                            return;
+                        if(!estValide(this)) //On ne peut pas cliquer sur le bouton 2x
+                        {
+                            afficheur.sendMessage("Déplacement invalide!");
+                        }
+                        else
+                        {
+                            setSymbol(this, joueurs[currentTurn]); //X ou O 
+                            
+                            jeuEstFini= rechercherVainqueur(pions, joueurs, currentTurn);
+                            
+                            //Le jeu est fini (Quelqu'un a gagné)
+                            if(jeuEstFini)
+                            {
+                                afficheur.sendMessage("Joueur " + joueurs[currentTurn]+ " a gagné !");
+                                return;
+                            }
+                            //Le jeu est fini (Match nul)
+                            if (tableauEstPlein(pions))
+                            {
+                                afficheur.sendMessage("Match nul !!!");
+                                return;
+                            }
+                            //Le jeu n'est pas encore fini
+                            
+                            currentTurn= currentTurn ^ 1; 
+                           
+                            afficheur.sendMessage("Joueur "+ joueurs[currentTurn] + ", à votre tour");
+                            
+                        }
+                    });
+                }
+            }
+            main();
+            
+            
+        </script>
+            
+    </body>
+</html>
