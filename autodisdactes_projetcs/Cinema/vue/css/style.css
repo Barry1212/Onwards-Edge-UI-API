@@ -1,0 +1,27 @@
+body{
+	
+	background-color:#aa0000;
+	background-size:cover;
+	padding:5%;
+}
+#myCarousel{
+	
+	margin-left:15%;
+}
+.jumbotron h1{
+	
+	text-align:center;
+	
+}
+.row p{
+	
+	color:white;
+}
+.row h2{
+	
+	color:white;
+}
+.btn-group a{
+	
+	color:white;
+}

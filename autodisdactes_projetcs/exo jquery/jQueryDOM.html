@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>ISFCE JavaScript jQuery DOM</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    </head>
+    
+	<body class="container">
+        
+        <div id="jumbotron" class="jumbotron">
+            <h1>Tourisme</h1>
+            <h4>Un tour du monde</h4>
+        </div>
+
+        <h4 id="titre_destination">Votre choix de destination</h4>
+        <input id="destination" class="form-control" type="text" placeholder="Un pays"/>
+        <button id="bouton1" class="btn btn-primary">J'ai choisi !</button>
+
+        <div class="row">
+            
+			<div id="pays1" class="col-sm-4">
+                <h2>Egypte</h2>
+                Les pyramides
+                <img id="image1" src="images/egypte.jpg" class="img-responsive" />
+                <a href="https://fr.wikipedia.org/wiki/Egypte">Lien Wikipedia</a>
+                <p id="description_egypte">Avec plus de 90 millions d'habitants en 2015, l'Égypte est le troisième pays le plus peuplé d'Afrique derrière le Nigeria et l'Éthiopie. En très forte croissance, sa population a été multipliée par quatre en soixante ans. Sa capitale est Le Caire – القاهرة ( al-Qâhira). Si la langue officielle est l'arabe, la langue parlée est l'égyptien (arabe dialectal). </p>
+            </div>
+            
+			<div id="pays2" class="col-sm-4">
+                <h2>Grèce</h2>
+                L'acropole d'Athènes
+                <img id="image2" src="images/grece.jpg" class="img-responsive"/>
+                <a href="https://fr.wikipedia.org/wiki/Grèce">Lien Wikipedia</a>
+                <p id="description_grece">La Grèce, d'une superficie de 131 957 km2 pour un peu moins de onze millions d'habitants, partage des frontières terrestres avec l’Albanie, l'Ancienne République yougoslave de MacédoineN 2, la Bulgarie et la Turquie et partage des frontières maritimes avec l'Albanie, l'Italie, la Libye, l'Égypte et la Turquie, cette dernière source de contentieux.</p>
+            </div>
+            
+			<div id="pays3" class="col-sm-4">
+                <h2>Australie</h2>
+                Great ocean road
+                <img id="image3" src="images/australie.jpg" class="img-responsive"/>
+                <a id="lien_australie" href="https://fr.wikipedia.org/wiki/Australie">Lien Wikipedia</a>
+                <p id="description_australie">L'Australie, en forme longue le Commonwealth d'Australie, en anglais Australia et Commonwealth of Australia, est un pays de l'hémisphère sud dont la superficie couvre la plus grande partie de l'Océanie. En plus de l'île éponyme, l'Australie comprend également la Tasmanie ainsi que d’autres îles des océans Austral, Pacifique et Indien. </p>   
+            </div>
+        </div>
+
+        <h1>Actions sur les pays</h1>
+        <div class="btn-group-vertical">
+            <button id="bouton2" type="button" class="btn btn-success">Destination : Pologne</button>
+            <button id="bouton3" type="button" class="btn btn-success">Titre des pays</button>
+            <button id="bouton4" type="button" class="btn btn-success">Description de l'Australie</button>
+            <button id="bouton5" type="button" class="btn btn-success">Remplacement du lien pour l'Australie</button>
+        </div>
+
+        <h1>Les continents</h1>
+        <ul id="continents">
+            <li>Amérique</li>
+            <li id="asie">Asie</li>
+            <li id="europe">Europe</li>
+        </ul>
+       
+
+        <script>
+            $(document).ready(function () {
+
+                 $("#image1").click(function() {
+                     var a = $("#pays1").text();
+                     alert(a);
+                 });
+				
+            $("#bouton1").dblclick(function() {
+                var a = $("#destination").val();
+                 alert(a);
+            });
+
+                 
+            $("#image3").dblclick(function() {
+               var b = $("#image3").attr('src');
+               alert(b);
+            });
+                
+                
+            $("#bouton2").click(function(){
+                $("#destination").val("Pologne");
+            });
+
+             
+            $("#bouton3").click(function() {
+                $("h2").text("Un pays");
+            });
+            
+            $("#bouton5").click(function() {
+                $("#lien_australie").attr('href',"http://www.australia.com/fr-fr").text("Site de l'office du tourisme d'Australie");
+                
+            });
+            
+            $("a").mouseenter(function (){
+               var a = $(this).attr('href');
+               alert(a);
+            });
+            
+            $("img").before('<p><b>Photographie</b></p>');
+            
+            $("img").after(function() {
+                var a = $(this).attr('src');
+                return a;
+            });
+            
+            
+            
+            $("#continents").prepend("<li>Afrique</li>");
+            $("#continents").append("<li>l'Oceanie</li>");
+            
+            $("li").prepend("Continent ");
+            
+            $("#jumbotron").empty();
+                
+            $("#titre_destination").empty();
+				
+            $("button").removeClass("btn-success");
+            $("button").addClass("btn-primary");
+				
+	    $('#jumbotron').click(function () {
+                $("#jumbotron").toggleClass("btn-warning");
+                $("#jumbotron").toggleClass("btn-primary");
+            });
+            
+            
+            $("p").css("color","blue");
+            
+            $("#image1").parent().css("background-color","lightgrey");
+            $("#pays3").children().css("border-style","dashed");
+            
+            $("#asie").next().css("color","blue");
+            $("#europe").prevAll().css("color","red");
+            
+			});
+        </script>
+
+
+    </body>
+</html>

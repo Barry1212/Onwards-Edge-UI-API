@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<HEAD>
+
+<SCRIPT language="javascript">
+
+function semaine ()
+	
+{
+	
+var tabSemaine=new Array ("lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche");
+var tranche=tabSemaine.slice(3,7);
+var tranche2=tabSemaine.slice(0,3);
+document.write(tranche.concat(tranche2));
+
+}
+	
+</SCRIPT>
+		 
+</HEAD>		
+
+
+<BODY>
+<H1>Jour de la semaine</H1>
+<INPUT type="text">
+<INPUT type="button" value="Afficher les jours" onclick="semaine()">
+</BODY>
+
+
+</HTML>
